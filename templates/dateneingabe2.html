@@ -1,0 +1,131 @@
+<ion-view view-title="{{ tagebuchName }}">
+  <ion-content class="padding">
+
+    <div ng-include src="dateneingabetemplate"></div>
+
+    <button class="button button-block" ng-click="tagebucheingabenspeichern()">
+      Speichern
+    </button>
+
+  </ion-content>
+</ion-view>
+
+<script type="text/ng-template" id="diabeteseingabe.html">
+  <div class="list">
+    <div class="item item-divider" ng-if="neuFlag===true">
+      {{ tempeingabe.datum }} - {{ tempeingabe.uhrzeit }}
+    </div>
+    <div class="item item-divider" ng-if="neuFlag===false">
+      Datum: manuelle Eingabe folgt ...
+    </div>
+    <div class="item item-divider">
+      Blutzucker
+    </div>
+    <label class="item item-input item-stacked-label">
+      <span class="input-label">Vor dem Essen (in mg/dl)</span>
+      <input type="text" placeholder="110" ng-model="tempeingabe.blutzuckerVorDemEssen">
+    </label>
+    <label class="item item-input item-stacked-label">
+      <span class="input-label">Nach dem Essen (in mg/dl)</span>
+      <input type="text" placeholder="110" ng-model="tempeingabe.blutzuckerNachDemEssen">
+    </label>
+    <div class="item item-divider">
+      Medikamente
+    </div>
+
+<!--    <ul class="list" ng-if="tempeingabe.medikamente===true">
+      <li class="item" ng-repeat="medikament in tempeingabe.medikamente">
+        {{ medikament.wirkstoff }} + " - " + {{ medikament.dosis }}
+      </li>
+    </ul>
+    <div class="item item-icon-right" ng-click="medikamenteingabe()">
+      <i class="icon ion-plus-round"></i>
+      Medikament hinzufügen
+    </div>-->
+
+    <div class="item item-divider">
+      Blutdruck
+    </div>
+    <label class="item item-input item-stacked-label">
+      <span class="input-label">Systolisch</span>
+      <input type="text" placeholder="120" ng-model="tempeingabe.blutdrucksys">
+    </label>
+    <label class="item item-input item-stacked-label">
+      <span class="input-label">Diastolisch</span>
+      <input type="text" placeholder="85" ng-model="tempeingabe.blutdruckdia">
+    </label>
+    <div class="item item-divider">
+      Sonstiges
+    </div>
+    <label class="item item-input item-stacked-label">
+      <span class="input-label">Bemerkungen</span>
+      <input type="text" placeholder="zum Beispiel Unter- oder Überzuckerung" ng-model="tempeingabe.bemerkung">
+    </label>
+  </div>
+
+</script>
+
+<script type="text/ng-template" id="bluthochdruckeingabe.html">
+  <div class="list">
+    <div class="item item-divider" ng-if="neuFlag===true">
+      {{ tempeingabe.datum }} - {{ tempeingabe.uhrzeit }}
+    </div>
+    <div class="item item-divider" ng-if="neuFlag===false">
+      Datum: manuelle Eingabe folgt ...
+    </div>
+    <div class="item item-divider">
+      Blutdruck
+    </div>
+    <label class="item item-input item-stacked-label">
+      <span class="input-label">Systolisch</span>
+      <input type="text" placeholder="120" ng-model="tempeingabe.systolisch">
+    </label>
+    <label class="item item-input item-stacked-label">
+      <span class="input-label">Diatolisch</span>
+      <input type="text" placeholder="85" ng-model="tempeingabe.diastolisch">
+    </label>
+    <div class="item item-divider">
+      Medikament
+    </div>
+    <div class="item item-divider">
+      Sonstiges
+    </div>
+    <label class="item item-input item-stacked-label">
+      <span class="input-label">Bemerkungen</span>
+      <input type="text" placeholder="zum Beispiel Schwindel, Kopfschmerzen, etc." ng-model="tempeingabe.bemerkung">
+    </label>
+  </div>
+</script>
+
+<script id="modalmedikamente.html" type="text/ng-template">
+  <ion-modal-view>
+    <ion-header-bar>
+      <h1 class="title">Medikamenteneingabe</h1>
+    </ion-header-bar>
+    <ion-content class="padding">
+      <div class="list">
+
+        <label class="item item-input item-select">
+          <div class="input-label">
+            Wirkstoff auswählen:
+          </div>
+          <select ng-model="wirkstoffetempdata.repeatselected">
+            <option ng-repeat="wirkstoff in wirkstoffetempdata.availableoptions">{{ wirkstoff }}</option>
+          </select>
+        </label>
+
+        <div class="list">
+          <label class="item item-input item-stacked-label">
+            <span class="input-label">Dosis</span>
+            <input type="text" placeholder="0" ng-model="wirkstoffetempdata.dosis">
+          </label>
+        </div>
+
+        <button class="button button-block" ng-click="medikamenteingabespeichern()">
+          Speichern
+        </button>
+
+      </div>
+    </ion-content>
+  </ion-modal-view>
+</script>

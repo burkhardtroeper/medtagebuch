@@ -1,0 +1,127 @@
+<ion-view view-title="Übersicht {{ tagebuchName }}">
+  <ion-content class="padding">
+
+    <div>
+      <span>Zeitraum wählen:</span>
+      <button class="button badge-stable">Von</button>
+      <button class="button badge-stable">bis</button>
+    </div>
+
+    <div ng-include src="datenausgabetemplate"></div>
+
+  </ion-content>
+</ion-view>
+
+<script type="text/ng-template" id="diabetesausgabe.html">
+
+  <div class="row">
+    <div class="col col-25">
+    </div>
+    <div class="col col-20">
+      Blutzucker vor dem Essen
+    </div>
+    <div class="col col-20">
+      Blutzucker nach dem Essen
+    </div>
+    <div class="col col-20" ng-click="showmore($index)">
+    </div>
+  </div>
+
+  <div class="list">
+
+    <div class="item" ng-repeat="ausgabe in tempausgabe">
+      <div class="row">
+        <div class="col col-25">
+          {{ ausgabe.datum }}<br>{{ ausgabe.uhrzeit }}
+        </div>
+        <div class="col col-20">
+          {{ ausgabe.blutzuckerVorDemEssen }}
+        </div>
+        <div class="col col-50">
+          {{ ausgabe.blutzuckerNachDemEssen }}
+        </div>
+        <div class="col col-10" ng-click="showmore($index)">
+          <i class="icon-right ion-chevron-right"></i>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+
+</script>
+
+<script type="text/ng-template" id="bluthochdruckausgabe.html">
+
+  <div class="row">
+    <div class="col col-25">
+    </div>
+    <div class="col col-20">
+      Systolisch
+    </div>
+    <div class="col col-50">
+      Diastolisch
+    </div>
+    <div class="col col-20" ng-click="showmore($index)">
+    </div>
+  </div>
+
+
+  <div class="list">
+
+    <div class="item" ng-repeat="ausgabe in tempausgabe">
+      <div class="row">
+        <div class="col col-25">
+          {{ ausgabe.datum }} <br>{{ ausgabe.uhrzeit }}
+        </div>
+        <div class="col col-20">
+          {{ ausgabe.systolisch }}
+        </div>
+        <div class="col col-20">
+          {{ ausgabe.diastolisch }}
+        </div>
+        <div class="col col-20">
+          <i class="ion-chevron-right"></i>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</script>
+
+<script id="modalmoreinfodiabetes.html" type="text/ng-template">
+  <ion-modal-view>
+    <ion-header-bar>
+      <h1 class="title">{{ modalmoreinfodata.datum }}</h1>
+    </ion-header-bar>
+    <ion-content>
+      <p>{{ modalmoreinfodata.blutzucker }}</p>
+      <p ng-repeat="medikamente in modalmoreinfodata.medikamente">
+        Wirkstoff: {{ medikamente.wirkstoff }} - Dosis: {{ medikamente.dosis }}
+      </p>
+      <p>Blutdruck:</p>
+      <p>Systolisch: {{ modalmoreinfodata.blutdrucksys }}</p>
+      <p>Diastolisch: {{ modalmoreinfodata.blutdruckdia }}</p>
+      <p>Bemerkungen: {{ modalmoreinfodata.bemerkungen }}</p>
+    </ion-content>
+  </ion-modal-view>
+</script>
+
+<script id="modalmoreinfobluthochdruck.html" type="text/ng-template">
+  <ion-modal-view>
+    <ion-header-bar>
+      <h1 class="title">{{ modalmoreinfodata.datum }}</h1>
+    </ion-header-bar>
+    <ion-content>
+      <p>{{ modalmoreinfodata.blutzucker }}</p>
+      <p ng-repeat="medikamente in modalmoreinfodata.medikamente">
+        Wirkstoff: {{ medikamente.wirkstoff }} - Dosis: {{ medikamente.dosis }}
+      </p>
+      <p>Blutdruck:</p>
+      <p>Systolisch: {{ modalmoreinfodata.blutdrucksys }}</p>
+      <p>Diastolisch: {{ modalmoreinfodata.blutdruckdia }}</p>
+      <p>Bemerkungen: {{ modalmoreinfodata.bemerkungen }}</p>
+    </ion-content>
+  </ion-modal-view>
+</script>
